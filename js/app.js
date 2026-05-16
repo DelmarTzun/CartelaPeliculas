@@ -1,10 +1,4 @@
-const API_DIRECTA = "http://52.171.58.51:8080/api/cartelera";
-
-/** En HTTPS (Azure) el navegador bloquea HTTP; usamos el proxy /api/cartelera */
-const API_URL =
-  window.location.protocol === "https:"
-    ? `${window.location.origin}/api/cartelera`
-    : API_DIRECTA;
+const API_URL = "http://52.171.58.51:8080/api/cartelera";
 
 let peliculas = [];
 let modalInstance = null;
@@ -234,14 +228,10 @@ async function cargarCartelera() {
     llenarFiltroUbicacion();
     renderizarCartelera();
   } catch (err) {
-    const esRed =
-      err.message.includes("Failed to fetch") || err.name === "TypeError";
     mostrarError(
-      esRed && window.location.protocol === "https:"
-        ? "No se pudo cargar la cartelera. Si acabas de publicar en Azure, vuelve a desplegar incluyendo la carpeta api/ (proxy HTTPS)."
-        : esRed
-          ? "No se pudo conectar con la API. Verifica tu conexión o que el servidor permita peticiones (CORS)."
-          : err.message
+      err.message.includes("Failed to fetch") || err.name === "TypeError"
+        ? "No se pudo conectar con la API. Verifica tu conexión o que el servidor permita peticiones desde el navegador (CORS)."
+        : err.message
     );
   }
 }
