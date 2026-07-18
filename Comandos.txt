@@ -1,0 +1,5 @@
+echo "Nombre completo: Delmar Tzun" > identificacion-so1.txt
+echo "Carné: 202512345" >> identificacion-so1.txt
+echo "Curso: Sistemas Operativos I" >> identificacion-so1.txt
+echo "Fecha: $(date)" >> identificacion-so1.txt
+cat identificacion-so1.txt
